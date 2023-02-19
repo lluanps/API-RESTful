@@ -1,4 +1,6 @@
-package br.com.luan.controllers;
+package br.com.luan.controllers; 
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,6 +18,12 @@ public class PersonController {
 	
 	@Autowired
 	private PersonService service;
+	
+	@RequestMapping(method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Person> findAll() {
+		return service.findAll();
+	}
 	
 	@RequestMapping(value = "/{id}",
 			method = RequestMethod.GET,
