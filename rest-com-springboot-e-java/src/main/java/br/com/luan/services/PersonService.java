@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.luan.data.vo.v1.PersonVO;
 import br.com.luan.exceptions.ResourceNotFoundException;
-import br.com.luan.model.Person;
 import br.com.luan.repositories.PersonRepository;
 
 @Service
@@ -18,14 +18,14 @@ public class PersonService {
 	@Autowired
 	private PersonRepository repository;
 
-	public List<Person> findAll() {
+	public List<PersonVO> findAll() {
 		
 		logger.info("Finding all people");
 		
 		return repository.findAll();
 	}
 
-	public Person findById(Long id) {
+	public PersonVO findById(Long id) {
 		
 		logger.info("Finding one person");
 				
@@ -33,17 +33,17 @@ public class PersonService {
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this id " + id));
 	}
 	
-	public Person create(Person person) {
+	public PersonVO create(PersonVO person) {
 		
 		logger.info("Creating one person");
 		return repository.save(person);
 	}
 	
-	public Person update(Person person) {
+	public PersonVO update(PersonVO person) {
 		
 		logger.info("Updating one person");
 		
-		Person entity = repository.findById(person.getId()).
+		PersonVO entity = repository.findById(person.getId()).
 				orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
 		
 		entity.setFirstName(person.getFirstName());
@@ -58,7 +58,7 @@ public class PersonService {
 		
 		logger.info("Deleting one person");
 		
-		Person entity = repository.findById(id).
+		PersonVO entity = repository.findById(id).
 				orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
 		
 		repository.delete(entity);
