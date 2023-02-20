@@ -5,3 +5,10 @@ spring:
       url: jdnc:mysql://localhost:3306/rest_com_springboot?useTimezone=true&serverTimezone=UTC
       username: root
       password: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+      show-sql: false
