@@ -19,7 +19,7 @@ import br.com.luan.data.vo.v2.PersonVOV2;
 import br.com.luan.services.PersonService;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person/v1")
 public class PersonController {
 	
 	@Autowired
