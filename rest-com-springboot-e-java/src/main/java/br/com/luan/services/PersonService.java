@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.luan.data.vo.v1.PersonVO;
+import br.com.luan.data.vo.v2.PersonVOV2;
 import br.com.luan.exceptions.ResourceNotFoundException;
 import br.com.luan.mapper.DozerMapper;
 import br.com.luan.model.Person;
@@ -46,6 +47,16 @@ public class PersonService {
 		return vo;
 	}
 	
+	public PersonVOV2 createV2(PersonVOV2 person) {
+		
+		logger.info("Creating one person");
+		
+		var entity = DozerMapper.parseObject(person, Person.class);
+		
+		var vo = DozerMapper.parseObject(repository.save(entity), PersonVOV2.class);
+		return vo;
+	}
+	
 	public PersonVO update(PersonVO person) {
 		
 		logger.info("Updating one person");
@@ -71,5 +82,6 @@ public class PersonService {
 		
 		repository.delete(entity);
 	}
+
 
 }
