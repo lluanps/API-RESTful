@@ -2,13 +2,20 @@ package br.com.luan.data.vo.v1;
 
 import java.io.Serializable;
 
+/*@JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender"})ordena os campos como preferir*/
 public class PersonVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	
+	/*@JsonProperty("first_name")altera o nome*/
 	private String firstName;
+	
+	/*@JsonProperty("last_name")altera o nome*/
 	private String lastName;
 	private String address;
+	
+	/*@JsonIgnore /o campo nao será vizualizado*/
 	private String gender;
 	
 	public PersonVO() {
