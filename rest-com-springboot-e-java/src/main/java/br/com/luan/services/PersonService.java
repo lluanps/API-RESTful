@@ -9,6 +9,7 @@ import br.com.luan.data.vo.v1.PersonVO;
 import br.com.luan.data.vo.v2.PersonVOV2;
 import br.com.luan.exceptions.ResourceNotFoundException;
 import br.com.luan.mapper.DozerMapper;
+import br.com.luan.mapper.custom.PersonMapper;
 import br.com.luan.model.Person;
 import br.com.luan.repositories.PersonRepository;
 
@@ -19,7 +20,10 @@ public class PersonService {
 	private Logger logger = Logger.getLogger(PersonService.class.getName()); 
 	
 	@Autowired
-	private PersonRepository repository;
+	PersonRepository repository;
+	
+	@Autowired
+	PersonMapper mapper;
 
 	public List<PersonVO> findAll() {
 		
@@ -51,9 +55,9 @@ public class PersonService {
 		
 		logger.info("Creating one person");
 		
-		var entity = DozerMapper.parseObject(person, Person.class);
+		var entity = mapper.convertVoToEntity(person);
 		
-		var vo = DozerMapper.parseObject(repository.save(entity), PersonVOV2.class);
+		var vo = mapper.convertEntityToVo(repository.save(entity));
 		return vo;
 	}
 	
