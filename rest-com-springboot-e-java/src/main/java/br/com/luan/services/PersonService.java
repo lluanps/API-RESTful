@@ -18,7 +18,6 @@ import br.com.luan.repositories.PersonRepository;
 
 @Service
 public class PersonService {
-
 	
 	private Logger logger = Logger.getLogger(PersonService.class.getName()); 
 	
