@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.luan.data.vo.v1.PersonVO;
+import br.com.luan.exceptions.RequiredObjectIsNullException;
 import br.com.luan.model.Person;
 import br.com.luan.repositories.PersonRepository;
 import br.com.luan.services.PersonService;
@@ -84,6 +85,19 @@ class PersonServiceTest {
 	}*/
 
 	@Test
+	void testCreateWithNullPerson() throws Exception {
+		Exception exception = assertThrows(RequiredObjectIsNullException.class
+				, () -> {
+					service.create(null);
+				});
+		
+		String expectedMessage = "It is not allowed to persist a null object";
+		String actualMessage = exception.getMessage();
+		
+		assertTrue(actualMessage.contains(expectedMessage));
+	}
+	
+	@Test
 	void testUpdate() throws Exception {
 		Person entity = input.mockEntity(1); 
 		entity.setId(1L);
@@ -109,6 +123,19 @@ class PersonServiceTest {
 		assertEquals("Last Name Test1", result.getLastName());
 		assertEquals("Female", result.getGender());
 
+	}
+	
+	@Test
+	void testUpdateWithNullPerson() throws Exception {
+		Exception exception = assertThrows(RequiredObjectIsNullException.class
+				, () -> {
+					service.update(null);
+				});
+		
+		String expectedMessage = "It is not allowed to persist a null object";
+		String actualMessage = exception.getMessage();
+		
+		assertTrue(actualMessage.contains(expectedMessage));
 	}
 
 	@Test

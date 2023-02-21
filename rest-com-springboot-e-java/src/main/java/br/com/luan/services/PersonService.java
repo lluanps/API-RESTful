@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.com.luan.controllers.PersonController;
 import br.com.luan.data.vo.v1.PersonVO;
 import br.com.luan.data.vo.v2.PersonVOV2;
+import br.com.luan.exceptions.RequiredObjectIsNullException;
 import br.com.luan.exceptions.ResourceNotFoundException;
 import br.com.luan.mapper.DozerMapper;
 import br.com.luan.mapper.custom.PersonMapper;
@@ -58,6 +59,8 @@ public class PersonService {
 	
 	public PersonVO create(PersonVO person) throws Exception {
 		
+		if (person == null) throw new RequiredObjectIsNullException();
+				
 		logger.info("Creating one person");
 		
 		var entity = DozerMapper.parseObject(person, Person.class);
@@ -78,6 +81,8 @@ public class PersonService {
 	}
 	
 	public PersonVO update(PersonVO person) throws Exception {
+	
+		if (person == null) throw new RequiredObjectIsNullException();
 		
 		logger.info("Updating one person");
 		
