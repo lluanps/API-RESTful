@@ -12,6 +12,7 @@ import br.com.luan.data.vo.v1.BookVO;
 import br.com.luan.exceptions.RequiredObjectIsNullException;
 import br.com.luan.exceptions.ResourceNotFoundException;
 import br.com.luan.mapper.DozerMapper;
+import br.com.luan.mapper.custom.PersonMapper;
 import br.com.luan.model.Book;
 import br.com.luan.repositories.BookRepository;
 
@@ -22,6 +23,9 @@ public class BookService {
 	
 	@Autowired
 	BookRepository repository;
+	
+	@Autowired
+	PersonMapper mapper;
 
 	public List<BookVO> findAll() {
 		
