@@ -40,3 +40,4 @@ blog/bin/
 hs_err_pid*
 
 .metadata
+.RESTFull
